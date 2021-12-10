@@ -14,8 +14,10 @@ pipeline {
       }
     }
      stage('docker-login') {
+     steps {
     docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') 
       
+    }
     }
     stage('Build Docker Image') {
       steps {
