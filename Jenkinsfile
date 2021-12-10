@@ -9,12 +9,13 @@ pipeline {
   }
   stages {
     stage('Build') {
-       container('maven')
-      steps {  // no container directive is needed as the maven container is the default
+      steps { 
+         container('maven') {
+          // no container directive is needed as the maven container is the default
         sh "mvn clean package"   
       }
     }
-  
+  }
 
     stage('Kaniko Build & Push Image') {
       steps {
