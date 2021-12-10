@@ -13,14 +13,34 @@ pipeline {
         sh "mvn clean package"   
       }
     }
-    stage('Build Docker Image') {
+    
+
+    stage('Kaniko Build & Push Image') {
       steps {
-        container('docker') {  
-          sh "docker build -t vigneshkaws/promo-app:dev ." // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
-          sh "docker login -u vigneshkaws -p Shakthi@15"
-          sh "docker push vigneshkaws/promo-app:dev"        // which is just connecting to the host docker deaemon
+        container('kaniko') {
+          script {
+            sh '''
+            /kaniko/executor --dockerfile `pwd`/Dockerfile \
+                             --context `pwd` \
+                             --destination=justmeandopensource/myweb:${BUILD_NUMBER}
+            '''
+          }
+        }
+      }
+    }  
+   
+   stage('Deploy App to Kubernetes') {     
+      steps {
+        container('kubectl') {
+          withCredentials([file(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
+            sh 'sed -i "s/<TAG>/${BUILD_NUMBER}/" myweb.yaml'
+            sh 'kubectl apply -f myweb.yaml'
+          }
         }
       }
     }
+  
   }
-}
+ }
+ 
+  
