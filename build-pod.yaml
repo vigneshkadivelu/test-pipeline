@@ -21,6 +21,9 @@ spec:
     command:
     - /busybox/cat
     tty: true
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
   - name: docker
     image: docker
     command:
@@ -28,10 +31,7 @@ spec:
     - "-f"
     - /dev/null
     imagePullPolicy: Always
-    
     volumeMounts:
-      - name: kaniko-secret
-        mountPath: /kaniko/.docker
       - name: docker
         mountPath: /var/run/docker.sock
         
@@ -44,4 +44,4 @@ spec:
             path: config.json
     - name: docker
       hostPath:
-        path: /var/run/docker.sock
+        path: /var/run/docker.sock   
