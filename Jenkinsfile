@@ -13,15 +13,12 @@ pipeline {
         sh "mvn clean package"   
       }
     }
-     
- stage('Build Docker Image') {
-      steps {// This step should not normally be used in your script. Consult the inline help for details.
-withDockerRegistry(credentialsId: 'dockerpwd', url: 'https://hub.docker.com/') {
-    // some block
+    stage('Build Docker Image') {
+      steps {
         container('docker') {  
-          sh "docker build -t vigneshkaws/promo-app:dev ."  // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
-          sh "docker push vigneshkaws/promo-app:dev"        // which is just connecting to the host docker deaemon
-       }
+          sh "docker build -t vividlukeloresch/promo-app:dev ." // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
+          sh "docker login "index.docker.io" -u janedoe -p <Shakthi@15>"
+          sh "docker push vividlukeloresch/promo-app:dev"        // which is just connecting to the host docker deaemon
         }
       }
     }
