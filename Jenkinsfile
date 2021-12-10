@@ -16,9 +16,9 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         container('docker') {  
-          sh "docker build -t vividlukeloresch/promo-app:dev ." // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
+          sh "docker build -t vigneshkaws/promo-app:dev ." // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
           sh "dockerlogin -u vigneshkaws -p Shakthi@15"
-          sh "docker push vividlukeloresch/promo-app:dev"        // which is just connecting to the host docker deaemon
+          sh "docker push vigneshkaws/promo-app:dev"        // which is just connecting to the host docker deaemon
         }
       }
     }
