@@ -17,7 +17,7 @@ pipeline {
       steps {
         container('docker') {  
           sh "docker build -t vigneshkaws/promo-app:dev ." // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
-          sh "dockerlogin -u vigneshkaws -p Shakthi@15"
+          sh "dockerlogin "index.docker.io" -u vigneshkaws -p Shakthi@15"
           sh "docker push vigneshkaws/promo-app:dev"        // which is just connecting to the host docker deaemon
         }
       }
