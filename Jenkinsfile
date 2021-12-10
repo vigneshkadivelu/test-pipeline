@@ -15,7 +15,7 @@ pipeline {
     }
      stage('docker-login') {
      steps {
-    docker.withRegistry('https://hub.docker.com/', 'dockerpwd') 
+    docker.withRegistry('https://registry.hub.docker.com', 'dockerpwd') 
       
     }
     }
