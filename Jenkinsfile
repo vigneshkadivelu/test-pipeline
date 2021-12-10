@@ -14,7 +14,7 @@ pipeline {
         sh "mvn clean package"   
       }
     }
-  }
+  
 
     stage('Kaniko Build & Push Image') {
       steps {
@@ -40,8 +40,8 @@ pipeline {
         }
       }
     }
-  
+ } 
   }
- }
+ 
  
   
