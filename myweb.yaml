@@ -23,7 +23,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: vigneshkaws/myweb:<TAG>
+      - image: asia-docker.pkg.dev/jenkins-331008/taghash:<TAG>
         imagePullPolicy: Always
         name: myweb
 
