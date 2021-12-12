@@ -24,7 +24,7 @@ pipeline {
             sh '''
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
-                             --destination=asia-docker.pkg.dev/jenkins-331008/taghash:${BUILD_NUMBER}
+                             --destination=asia.gcr.io/jenkins-331008/taghash:${BUILD_NUMBER}
             '''
           }
         }
