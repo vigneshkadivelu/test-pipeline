@@ -23,7 +23,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: asia-docker.pkg.dev/jenkins-331008/taghash:<TAG>
+      - image: asia.gcr.io/jenkins-331008/taghash:<TAG>
         imagePullPolicy: Always
         name: myweb
 
