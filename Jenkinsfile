@@ -16,13 +16,15 @@ pipeline {
       }
     }
   }
-}
 stage('Quality') {
-  steps { 
-    script {
-      withSonarQubeEnv(sonar)
-       sh "mvn sonar:sonar -DskipTests -e"   
+      steps { 
+         script {
+          withSonarQubeEnv(sonar)
+        sh "mvn sonar:sonar -DskipTests -e"   
       }
     }
   }
+
 }
+ 
+ }
