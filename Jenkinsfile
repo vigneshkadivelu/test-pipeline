@@ -17,10 +17,14 @@ pipeline {
     }
   }
 stage('Quality') {
-      steps { 
+      
+      steps {  
+         container('maven'){
+         
          script {
           withSonarQubeEnv(sonar)
         sh "mvn sonar:sonar -DskipTests -e"   
+      }
       }
     }
   }
