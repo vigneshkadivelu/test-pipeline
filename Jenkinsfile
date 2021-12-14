@@ -13,6 +13,20 @@ pipeline {
         sh "mvn clean package"   
       }
     }
+     stage('sonarqube analysis') {
+       steps {
+            container ('maven') {
+             withCredentials([string(credentialsId: "$SONAR_CREDENTIAL_ID", variable: 'sonarqube')]) {
+             withSonarQubeEnv('sonar') {
+             sh "mvn sonar:sonar -o -gs `pwd`/configuration/settings.xml -Dsonar.login=$sonarqube"
+                }
+              }
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+        }
     stage('Build Docker Image') {
       steps {
         container('docker') {  
