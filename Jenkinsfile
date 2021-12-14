@@ -16,7 +16,7 @@ pipeline {
      stage('sonarqube analysis') {
        steps {
             container ('maven') {
-             withCredentials([string(credentialsId: "$SONAR_CREDENTIAL_ID", variable: 'sonarqube')]) {
+             withCredentials([string(credentialsId: "sonarqube", variable: 'sonarqube')]) {
              withSonarQubeEnv('sonar') {
              sh "mvn sonar:sonar -o -gs `pwd`/configuration/settings.xml -Dsonar.login=$sonarqube"
                 }
